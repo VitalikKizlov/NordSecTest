@@ -9,52 +9,46 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State private var username = ""
-    @State private var password = ""
+    @EnvironmentObject var appDataContainer: AppDataContainer
     
     var body: some View {
         VStack {
             HeaderView()
+                .padding(.top, 134)
             
             VStack(spacing: 16) {
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(height: 40)
-                    .foregroundColor(.fieldBackground).opacity(0.12)
-                    .overlay(
-                        HStack(spacing: 9) {
-                            Image("usernameicon")
-                                .resizable()
-                                .frame(width: 16, height: 16, alignment: .center)
-                                .padding(.leading, 8)
-                            
-                            TextField("Username ", text: $username)
-                                .font(.system(size: 17, weight: .regular))
-                        }
-                    )
+                UsernameField()
+                PasswordField()
                 
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(height: 40)
-                    .foregroundColor(.fieldBackground).opacity(0.12)
-                    .overlay(
-                        HStack(spacing: 9) {
-                            Image("lockicon")
-                                .resizable()
-                                .frame(width: 16, height: 16, alignment: .center)
-                                .padding(.leading, 8)
-                            
-                            SecureField("Password", text: $password)
-                                .font(.system(size: 17, weight: .regular))
-                        }
-                    )
+                Button {
+                    appDataContainer.performLogin()
+                } label: {
+                    Text("Log in")
+                        .foregroundColor(.white)
+                }
+                .disabled(!appDataContainer.isValid)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40)
+                .background(appDataContainer.isValid ? Color.mainBlue : Color.mainBlue.opacity(0.4))
+                .cornerRadius(10)
+                .padding(.top, 8)
             }
             .padding(.top, 40)
             .padding(.horizontal, 32)
+            
+            Spacer()
+            
+            ZStack(alignment: .bottom) {
+                Image("background")
+                    .resizable()
+            }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(AppDataContainer())
     }
 }

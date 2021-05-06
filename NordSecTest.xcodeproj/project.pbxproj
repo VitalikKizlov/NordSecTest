@@ -18,6 +18,9 @@
 		2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8D72643E09D00D23B16 /* LoginView.swift */; };
 		2238D8EA2643E32C00D23B16 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8E92643E32C00D23B16 /* Color.swift */; };
 		2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8F82643E85F00D23B16 /* HeaderView.swift */; };
+		2238D9032643ECF400D23B16 /* UsernameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D9022643ECF400D23B16 /* UsernameField.swift */; };
+		2238D9092643ED0E00D23B16 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D9082643ED0E00D23B16 /* PasswordField.swift */; };
+		2238D9152643EFEC00D23B16 /* AppDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D9142643EFEC00D23B16 /* AppDataContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		2238D8D72643E09D00D23B16 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2238D8E92643E32C00D23B16 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2238D8F82643E85F00D23B16 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		2238D9022643ECF400D23B16 /* UsernameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameField.swift; sourceTree = "<group>"; };
+		2238D9082643ED0E00D23B16 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		2238D9142643EFEC00D23B16 /* AppDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +110,10 @@
 		2238D8942643DFC200D23B16 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2238D8E82643E32100D23B16 /* Extensions */,
 				2238D8952643DFC300D23B16 /* NordSecTestApp.swift */,
+				2238D9142643EFEC00D23B16 /* AppDataContainer.swift */,
 				2238D8D62643E03100D23B16 /* Views */,
+				2238D8E82643E32100D23B16 /* Extensions */,
 				2238D8972643DFCA00D23B16 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -180,6 +187,8 @@
 			children = (
 				2238D8D72643E09D00D23B16 /* LoginView.swift */,
 				2238D8F82643E85F00D23B16 /* HeaderView.swift */,
+				2238D9022643ECF400D23B16 /* UsernameField.swift */,
+				2238D9082643ED0E00D23B16 /* PasswordField.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -343,9 +352,12 @@
 			files = (
 				2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */,
 				2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */,
+				2238D9032643ECF400D23B16 /* UsernameField.swift in Sources */,
 				2238D8EA2643E32C00D23B16 /* Color.swift in Sources */,
+				2238D9092643ED0E00D23B16 /* PasswordField.swift in Sources */,
 				2238D8C02643DFCA00D23B16 /* ContentView.swift in Sources */,
 				2238D8BE2643DFCA00D23B16 /* NordSecTestApp.swift in Sources */,
+				2238D9152643EFEC00D23B16 /* AppDataContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,5 +36,6 @@ extension Color {
 }
 
 extension Color {
-    public static var fieldBackground = Color(hex: "#767680")
+    public static let fieldBackground = Color(hex: "#767680")
+    public static let mainBlue = Color(hex: "#4687FF")
 }
