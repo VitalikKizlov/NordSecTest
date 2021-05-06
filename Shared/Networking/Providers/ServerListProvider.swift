@@ -9,18 +9,20 @@ import Foundation
 import Combine
 
 protocol ServerListProviding {
-    func getList() -> AnyPublisher<Token, Error>
+    func getList() -> AnyPublisher<[Server], Error>
 }
 
-//struct ServerListProvider: ServerListProviding {
-//    func getList() -> AnyPublisher<Token, Error> {
-//        
-//    }
-//}
-
-/*
- .tryCatch({ (error) -> AnyPublisher<Token, Error> in
-     let creds = UserCredentials(name: "fsafsd", pass: "fsdf")
-     return apiSession.execute(Endpoint.getToken(creds: creds))
- })
- */
+struct ServerListProvider: ServerListProviding {
+    let apiSession: APISessionProviding
+    
+    func getList() -> AnyPublisher<[Server], Error> {
+        apiSession.execute(Endpoint.getServerList)
+            .tryCatch({ (error) -> AnyPublisher<[Server], Error> in
+                let username = KeychainWrapper.shared.getValueFor(service: .username)
+                let pass = KeychainWrapper.shared.getValueFor(service: .password)
+                let creds = UserCredentials(name: username, pass: pass)
+                return apiSession.execute(Endpoint.getToken(creds: creds))
+            })
+            .eraseToAnyPublisher()
+    }
+}

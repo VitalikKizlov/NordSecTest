@@ -45,7 +45,12 @@ enum KeychainServiceType: String {
 
 class KeychainWrapper {
     
-    func storeValueFor(account: String, service: KeychainServiceType, value: String) {
+    static let shared = KeychainWrapper()
+    private init() {}
+    
+    private let account = "nord"
+    
+    func storeValueFor(service: KeychainServiceType, value: String) {
         guard let passwordData = value.data(using: .utf8) else {
             print("Error converting value to data.")
             return
@@ -67,7 +72,7 @@ class KeychainWrapper {
         }
     }
     
-    func getValueFor(account: String, service: KeychainServiceType) -> String {
+    func getValueFor(service: KeychainServiceType) -> String {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account,

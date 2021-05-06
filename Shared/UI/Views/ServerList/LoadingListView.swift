@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct LoadingListView: View {
+    
+    @EnvironmentObject var appDataContainer: AppDataContainer
+    
     var body: some View {
         Text("Hello, Loading List!")
+            .onAppear {
+                appDataContainer.getServerList()
+            }
     }
 }
 

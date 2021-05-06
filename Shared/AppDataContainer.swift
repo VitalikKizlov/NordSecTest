@@ -52,17 +52,14 @@ class AppDataContainer: ObservableObject {
     
     let session: APISessionProviding
     let tokenProvider: TokenProviding
-    
-    /// - Tag: KeychainWrapper
-    
-    private let keychainWrapper = KeychainWrapper()
-    private let account = "nord"
+    let serverListProvider: ServerListProviding
     
     // MARK: - Init
     
     init(apiSession: APISessionProviding = ApiSession()) {
         self.session = apiSession
         self.tokenProvider = TokenProvider(apiSession: self.session)
+        self.serverListProvider = ServerListProvider(apiSession: self.session)
         
         isFormValidPublisher
             .receive(on: DispatchQueue.main)
@@ -99,17 +96,40 @@ class AppDataContainer: ObservableObject {
             .store(in: &cancellableSet)
     }
     
+    func getServerList() {
+        let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+            switch completion {
+            case .failure(let error):
+                print("Failure: \(error.localizedDescription)")
+                self?.state = .error(error)
+            case .finished:
+                print("Finished")
+            }
+        }
+        
+        let valueHandler: ([Server]) -> Void = { [weak self] list in
+            guard let self = self else { return }
+            print(list.count)
+            self.state = .list
+        }
+        
+        serverListProvider.getList()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+            .store(in: &cancellableSet)
+    }
+    
     // MARK: - Private Methods
     
     private func saveCredentialsAndToken(_ token: String) {
-        keychainWrapper.storeValueFor(account: account, service: .token, value: token)
-        keychainWrapper.storeValueFor(account: account, service: .username, value: username)
-        keychainWrapper.storeValueFor(account: account, service: .password, value: password)
+        KeychainWrapper.shared.storeValueFor(service: .token, value: token)
+        KeychainWrapper.shared.storeValueFor(service: .username, value: username)
+        KeychainWrapper.shared.storeValueFor(service: .password, value: password)
     }
     
     private func checkIfUserExists() {
-        let username = keychainWrapper.getValueFor(account: account, service: .username)
-        let pass = keychainWrapper.getValueFor(account: account, service: .password)
+        let username = KeychainWrapper.shared.getValueFor(service: .username)
+        let pass = KeychainWrapper.shared.getValueFor(service: .password)
         if !username.isEmpty && !pass.isEmpty {
             state = .loadingList
         }
