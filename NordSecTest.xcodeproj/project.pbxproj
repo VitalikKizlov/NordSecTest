@@ -15,6 +15,9 @@
 		2238D8C12643DFCA00D23B16 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8962643DFC300D23B16 /* ContentView.swift */; };
 		2238D8C22643DFCA00D23B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2238D8972643DFCA00D23B16 /* Assets.xcassets */; };
 		2238D8C32643DFCA00D23B16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2238D8972643DFCA00D23B16 /* Assets.xcassets */; };
+		2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8D72643E09D00D23B16 /* LoginView.swift */; };
+		2238D8EA2643E32C00D23B16 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8E92643E32C00D23B16 /* Color.swift */; };
+		2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D8F82643E85F00D23B16 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		2238D8B72643DFCA00D23B16 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2238D8BB2643DFCA00D23B16 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		2238D8BD2643DFCA00D23B16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2238D8D72643E09D00D23B16 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2238D8E92643E32C00D23B16 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2238D8F82643E85F00D23B16 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +104,9 @@
 		2238D8942643DFC200D23B16 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2238D8E82643E32100D23B16 /* Extensions */,
 				2238D8952643DFC300D23B16 /* NordSecTestApp.swift */,
-				2238D8962643DFC300D23B16 /* ContentView.swift */,
+				2238D8D62643E03100D23B16 /* Views */,
 				2238D8972643DFCA00D23B16 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -149,6 +156,32 @@
 				2238D8BD2643DFCA00D23B16 /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		2238D8D62643E03100D23B16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2238D8962643DFC300D23B16 /* ContentView.swift */,
+				2238D8F32643E7D100D23B16 /* Login */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2238D8E82643E32100D23B16 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2238D8E92643E32C00D23B16 /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2238D8F32643E7D100D23B16 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2238D8D72643E09D00D23B16 /* LoginView.swift */,
+				2238D8F82643E85F00D23B16 /* HeaderView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +341,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */,
+				2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */,
+				2238D8EA2643E32C00D23B16 /* Color.swift in Sources */,
 				2238D8C02643DFCA00D23B16 /* ContentView.swift in Sources */,
 				2238D8BE2643DFCA00D23B16 /* NordSecTestApp.swift in Sources */,
 			);
