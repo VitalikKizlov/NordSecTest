@@ -27,7 +27,9 @@
 		2238D93E264402BB00D23B16 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D93D264402BB00D23B16 /* TokenProvider.swift */; };
 		2238D945264402E900D23B16 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D944264402E900D23B16 /* Token.swift */; };
 		2238D95A26440D9A00D23B16 /* ServerListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D95926440D9A00D23B16 /* ServerListProvider.swift */; };
-		2238D960264417FD00D23B16 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D95F264417FD00D23B16 /* KeyChain.swift */; };
+		2238D960264417FD00D23B16 /* KeyChainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D95F264417FD00D23B16 /* KeyChainWrapper.swift */; };
+		2238D96C2644228500D23B16 /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D96B2644228500D23B16 /* ServerListView.swift */; };
+		2238D972264422D500D23B16 /* LoadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D971264422D500D23B16 /* LoadingListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +76,9 @@
 		2238D93D264402BB00D23B16 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		2238D944264402E900D23B16 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		2238D95926440D9A00D23B16 /* ServerListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListProvider.swift; sourceTree = "<group>"; };
-		2238D95F264417FD00D23B16 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		2238D95F264417FD00D23B16 /* KeyChainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainWrapper.swift; sourceTree = "<group>"; };
+		2238D96B2644228500D23B16 /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
+		2238D971264422D500D23B16 /* LoadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,11 +131,11 @@
 				2238D943264402E000D23B16 /* Models */,
 				2238D8952643DFC300D23B16 /* NordSecTestApp.swift */,
 				2238D9142643EFEC00D23B16 /* AppDataContainer.swift */,
+				2238D95F264417FD00D23B16 /* KeyChainWrapper.swift */,
 				2238D9252644021300D23B16 /* Networking */,
 				2238D94F2644031300D23B16 /* UI */,
 				2238D9542644031B00D23B16 /* Common */,
 				2238D8972643DFCA00D23B16 /* Assets.xcassets */,
-				2238D95F264417FD00D23B16 /* KeyChain.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -187,6 +191,7 @@
 			children = (
 				2238D8962643DFC300D23B16 /* ContentView.swift */,
 				2238D8F32643E7D100D23B16 /* Login */,
+				2238D96A2644227100D23B16 /* ServerList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +257,15 @@
 				2238D8E82643E32100D23B16 /* Extensions */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2238D96A2644227100D23B16 /* ServerList */ = {
+			isa = PBXGroup;
+			children = (
+				2238D96B2644228500D23B16 /* ServerListView.swift */,
+				2238D971264422D500D23B16 /* LoadingListView.swift */,
+			);
+			path = ServerList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,12 +432,14 @@
 				2238D8EA2643E32C00D23B16 /* Color.swift in Sources */,
 				2238D9272644021C00D23B16 /* APISessionProviding.swift in Sources */,
 				2238D9092643ED0E00D23B16 /* PasswordField.swift in Sources */,
-				2238D960264417FD00D23B16 /* KeyChain.swift in Sources */,
+				2238D960264417FD00D23B16 /* KeyChainWrapper.swift in Sources */,
 				2238D8C02643DFCA00D23B16 /* ContentView.swift in Sources */,
 				2238D8BE2643DFCA00D23B16 /* NordSecTestApp.swift in Sources */,
 				2238D9152643EFEC00D23B16 /* AppDataContainer.swift in Sources */,
 				2238D93E264402BB00D23B16 /* TokenProvider.swift in Sources */,
 				2238D95A26440D9A00D23B16 /* ServerListProvider.swift in Sources */,
+				2238D96C2644228500D23B16 /* ServerListView.swift in Sources */,
+				2238D972264422D500D23B16 /* LoadingListView.swift in Sources */,
 				2238D945264402E900D23B16 /* Token.swift in Sources */,
 				2238D9372644025100D23B16 /* ApiSession.swift in Sources */,
 			);

@@ -16,9 +16,9 @@ struct ContentView: View {
         case .loggedOut:
             LoginView()
         case .loadingList:
-            Text("Start Loading list")
+            LoadingListView()
         case .list:
-            Text("List")
+            ServerListView()
         case .error:
             Text("Error")
         }

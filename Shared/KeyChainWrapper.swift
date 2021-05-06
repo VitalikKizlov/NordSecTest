@@ -39,17 +39,22 @@ struct KeychainWrapperError: Error {
     }
 }
 
+enum KeychainServiceType: String {
+    case username, password, token
+}
+
 class KeychainWrapper {
-    func storeGenericPasswordFor( account: String, service: String, password: String) throws {
-        guard let passwordData = password.data(using: .utf8) else {
+    
+    func storeValueFor(account: String, service: KeychainServiceType, value: String) {
+        guard let passwordData = value.data(using: .utf8) else {
             print("Error converting value to data.")
-            throw KeychainWrapperError(type: .badData)
+            return
         }
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account,
-            kSecAttrService as String: service,
+            kSecAttrService as String: service.rawValue,
             kSecValueData as String: passwordData
         ]
         
@@ -58,15 +63,15 @@ class KeychainWrapper {
         case errSecSuccess:
             break
         default:
-            throw KeychainWrapperError(status: status, type: .servicesError)
+            print(KeychainWrapperError(status: status, type: .servicesError))
         }
     }
     
-    func getGenericPasswordFor(account: String, service: String) throws -> String {
+    func getValueFor(account: String, service: KeychainServiceType) -> String {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account,
-            kSecAttrService as String: service,
+            kSecAttrService as String: service.rawValue,
             kSecMatchLimit as String: kSecMatchLimitOne,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
@@ -76,16 +81,19 @@ class KeychainWrapper {
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         
         guard status != errSecItemNotFound else {
-            throw KeychainWrapperError(type: .itemNotFound)
+            print(KeychainWrapperError(type: .itemNotFound))
+            return ""
         }
         guard status == errSecSuccess else {
-            throw KeychainWrapperError(status: status, type: .servicesError)
+            print(KeychainWrapperError(status: status, type: .servicesError))
+            return ""
         }
         guard let existingItem = item as? [String: Any],
               let valueData = existingItem[kSecValueData as String] as? Data,
               let value = String(data: valueData, encoding: .utf8)
         else {
-            throw KeychainWrapperError(type: .unableToConvertToString)
+            print(KeychainWrapperError(type: .unableToConvertToString))
+            return ""
         }
         
         return value

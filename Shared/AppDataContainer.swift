@@ -53,6 +53,11 @@ class AppDataContainer: ObservableObject {
     let session: APISessionProviding
     let tokenProvider: TokenProviding
     
+    /// - Tag: KeychainWrapper
+    
+    private let keychainWrapper = KeychainWrapper()
+    private let account = "nord"
+    
     // MARK: - Init
     
     init(apiSession: APISessionProviding = ApiSession()) {
@@ -63,6 +68,8 @@ class AppDataContainer: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: \.isValid, on: self)
             .store(in: &cancellableSet)
+        
+        checkIfUserExists()
     }
     
     // MARK: - Public Methods
@@ -82,6 +89,7 @@ class AppDataContainer: ObservableObject {
         
         let valueHandler: (Token) -> Void = { [weak self] token in
             guard let self = self else { return }
+            self.saveCredentialsAndToken(token.token)
             self.state = .loadingList
         }
         
@@ -89,6 +97,22 @@ class AppDataContainer: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &cancellableSet)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func saveCredentialsAndToken(_ token: String) {
+        keychainWrapper.storeValueFor(account: account, service: .token, value: token)
+        keychainWrapper.storeValueFor(account: account, service: .username, value: username)
+        keychainWrapper.storeValueFor(account: account, service: .password, value: password)
+    }
+    
+    private func checkIfUserExists() {
+        let username = keychainWrapper.getValueFor(account: account, service: .username)
+        let pass = keychainWrapper.getValueFor(account: account, service: .password)
+        if !username.isEmpty && !pass.isEmpty {
+            state = .loadingList
+        }
     }
     
 }
