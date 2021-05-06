@@ -26,6 +26,7 @@ struct UsernameField: View {
                     
                     TextField("Username ", text: $appDataContainer.username)
                         .font(.system(size: 17, weight: .regular))
+                        .autocapitalization(.none)
                 }
             )
     }

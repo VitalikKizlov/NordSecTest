@@ -11,13 +11,21 @@ import Combine
 class AppDataContainer: ObservableObject {
     
     // MARK: - Input
+    
     @Published var username = ""
     @Published var password = ""
     
     // MARK: - Output
-    @Published var isValid = false
     
-    // MARK: - Private Properties
+    @Published var isValid = false
+    @Published private(set) var state: State = .loggedOut
+    
+    // MARK: - Private
+    
+    enum State {
+        case loggedOut, loadingList, list, error(Error)
+    }
+    
     private var cancellableSet: Set<AnyCancellable> = []
     
     private var isUsernameValidPublisher: AnyPublisher<Bool, Never> {
@@ -40,8 +48,17 @@ class AppDataContainer: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    /// - Tag: APISession
+    
+    let session: APISessionProviding
+    let tokenProvider: TokenProviding
+    
     // MARK: - Init
-    init() {
+    
+    init(apiSession: APISessionProviding = ApiSession()) {
+        self.session = apiSession
+        self.tokenProvider = TokenProvider(apiSession: self.session)
+        
         isFormValidPublisher
             .receive(on: DispatchQueue.main)
             .assign(to: \.isValid, on: self)
@@ -49,8 +66,29 @@ class AppDataContainer: ObservableObject {
     }
     
     // MARK: - Public Methods
+    
     public func performLogin() {
-        print("Log in")
+        let creds = UserCredentials(name: username, pass: password)
+        
+        let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
+            switch completion {
+            case .failure(let error):
+                print("Failure: \(error.localizedDescription)")
+                self?.state = .error(error)
+            case .finished:
+                print("Finished")
+            }
+        }
+        
+        let valueHandler: (Token) -> Void = { [weak self] token in
+            guard let self = self else { return }
+            self.state = .loadingList
+        }
+        
+        tokenProvider.getToken(for: creds)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
+            .store(in: &cancellableSet)
     }
     
 }
