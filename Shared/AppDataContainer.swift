@@ -118,6 +118,7 @@ class AppDataContainer: ObservableObject {
         }
         
         serverListProvider.getList()
+            .retry(2)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &cancellableSet)
