@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Server: Codable {
+struct Server: Codable, Identifiable {
+    var id = UUID()
     let name: String
     let distance: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case name, distance
+    }
 }

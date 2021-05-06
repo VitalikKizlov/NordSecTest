@@ -31,6 +31,7 @@
 		2238D96C2644228500D23B16 /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D96B2644228500D23B16 /* ServerListView.swift */; };
 		2238D972264422D500D23B16 /* LoadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D971264422D500D23B16 /* LoadingListView.swift */; };
 		2238D9782644252600D23B16 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D9772644252600D23B16 /* Server.swift */; };
+		2238D97E26442A6C00D23B16 /* ServerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D97D26442A6C00D23B16 /* ServerRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		2238D96B2644228500D23B16 /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
 		2238D971264422D500D23B16 /* LoadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingListView.swift; sourceTree = "<group>"; };
 		2238D9772644252600D23B16 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		2238D97D26442A6C00D23B16 /* ServerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 			children = (
 				2238D96B2644228500D23B16 /* ServerListView.swift */,
 				2238D971264422D500D23B16 /* LoadingListView.swift */,
+				2238D97D26442A6C00D23B16 /* ServerRowView.swift */,
 			);
 			path = ServerList;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			files = (
 				2238D9312644023700D23B16 /* RequestProviding.swift in Sources */,
 				2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */,
+				2238D97E26442A6C00D23B16 /* ServerRowView.swift in Sources */,
 				2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */,
 				2238D9032643ECF400D23B16 /* UsernameField.swift in Sources */,
 				2238D8EA2643E32C00D23B16 /* Color.swift in Sources */,

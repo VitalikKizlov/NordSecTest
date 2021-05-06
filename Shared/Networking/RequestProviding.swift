@@ -69,9 +69,11 @@ enum Endpoint: RequestProviding {
         var request = URLRequest(url: url)
         request.httpMethod = method.value
         let token = KeychainWrapper.shared.getValueFor(service: .token)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        if !token.isEmpty {
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
         print("Request ----", request)
         return request
     }

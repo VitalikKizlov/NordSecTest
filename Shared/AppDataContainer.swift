@@ -20,6 +20,10 @@ class AppDataContainer: ObservableObject {
     @Published var isValid = false
     @Published private(set) var state: State = .loggedOut
     
+    /// - Tag: List
+    
+    @Published var serverList: [Server] = []
+    
     // MARK: - Private
     
     enum State {
@@ -109,7 +113,7 @@ class AppDataContainer: ObservableObject {
         
         let valueHandler: ([Server]) -> Void = { [weak self] list in
             guard let self = self else { return }
-            print(list.count)
+            self.serverList = list
             self.state = .list
         }
         

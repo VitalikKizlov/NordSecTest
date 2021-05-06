@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ServerListView: View {
+    
+    @EnvironmentObject var appDataContainer: AppDataContainer
+    
     var body: some View {
-        Text("Hello, Server List!")
+        List(appDataContainer.serverList) { server in
+            ServerRowView(server: server)
+        }
     }
 }
 
