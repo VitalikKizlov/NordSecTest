@@ -15,6 +15,7 @@ enum Endpoint: RequestProviding {
     case getToken(creds: UserCredentials)
     case getServerList
     
+    private static let scheme = "https"
     private static let baseURLString = "playground.tesonet.lt"
     
     private enum HTTPMethod {
@@ -58,7 +59,7 @@ enum Endpoint: RequestProviding {
     
     func urlRequest() -> URLRequest {
         var components = URLComponents()
-        components.scheme = "https"
+        components.scheme = Endpoint.scheme
         components.host = Endpoint.baseURLString
         components.path = path
         components.queryItems = parameters.compactMap { URLQueryItem(name: $0.key, value: $0.value)}
