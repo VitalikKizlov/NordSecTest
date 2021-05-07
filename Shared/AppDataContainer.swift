@@ -30,6 +30,10 @@ class AppDataContainer: ObservableObject {
         case loggedOut, loadingList, list, error(Error)
     }
     
+    enum SortMethod {
+        case distance, alphabetical
+    }
+    
     private var cancellableSet: Set<AnyCancellable> = []
     
     private var isUsernameValidPublisher: AnyPublisher<Bool, Never> {
@@ -100,6 +104,11 @@ class AppDataContainer: ObservableObject {
             .store(in: &cancellableSet)
     }
     
+    public func performLogOut() {
+        state = .loggedOut
+        // TODO: - Clean keychain
+    }
+    
     func getServerList() {
         let completionHandler: (Subscribers.Completion<Error>) -> Void = { [weak self] completion in
             switch completion {
@@ -122,6 +131,17 @@ class AppDataContainer: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: completionHandler, receiveValue: valueHandler)
             .store(in: &cancellableSet)
+    }
+    
+    /// - Tag: Sorting methods
+    
+    public func sortList(by sortMethod: SortMethod) {
+        switch sortMethod {
+        case .distance:
+            serverList = serverList.sorted(by: { $0.distance < $1.distance })
+        case .alphabetical:
+            serverList = serverList.sorted(by: { $0.name.localizedStandardCompare($1.name) == .orderedAscending })
+        }
     }
     
     // MARK: - Private Methods

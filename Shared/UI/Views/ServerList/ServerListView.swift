@@ -10,6 +10,7 @@ import SwiftUI
 struct ServerListView: View {
     
     @EnvironmentObject var appDataContainer: AppDataContainer
+    @State private var showFilterOptions = false
     
     var body: some View {
         NavigationView {
@@ -23,20 +24,30 @@ struct ServerListView: View {
             .navigationBarTitle("Testio.", displayMode: .inline)
             .listStyle(GroupedListStyle())
             .navigationBarItems(leading: Button(action: {
-                print("filter by")
+                showFilterOptions.toggle()
             }, label: {
                 HStack {
                     Image("sorticon")
                     Text("Filter")
                 }
             }), trailing: Button(action: {
-                print("log out")
+                appDataContainer.performLogOut()
             }, label: {
                 HStack {
                     Image("sorticon")
                     Text("Logout")
                 }
             }))
+            .actionSheet(isPresented: $showFilterOptions, content: {
+                ActionSheet(title: Text(""), buttons: [
+                    .default(Text("By distance"), action: {
+                        appDataContainer.sortList(by: .distance)
+                    }),
+                    .default(Text("Alphabetical"), action: {
+                        appDataContainer.sortList(by: .alphabetical)
+                    })
+                ])
+            })
         }
     }
 }
