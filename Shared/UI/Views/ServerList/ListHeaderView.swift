@@ -11,8 +11,10 @@ struct ListHeaderView: View {
     var body: some View {
         HStack {
             Text("SERVER")
+                .foregroundColor(.headerTitle)
             Spacer()
             Text("DISTANCE")
+                .foregroundColor(.headerTitle)
         }
         .padding(.horizontal)
     }

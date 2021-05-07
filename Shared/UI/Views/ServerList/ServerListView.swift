@@ -39,7 +39,7 @@ struct ServerListView: View {
                 }
             }))
             .actionSheet(isPresented: $showFilterOptions, content: {
-                ActionSheet(title: Text(""), buttons: [
+                ActionSheet(title: Text("Select option"), buttons: [
                     .default(Text("By distance"), action: {
                         appDataContainer.sortList(by: .distance)
                     }),

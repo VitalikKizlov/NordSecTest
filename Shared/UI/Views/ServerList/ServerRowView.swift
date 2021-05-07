@@ -13,7 +13,7 @@ struct ServerRowView: View {
     
     var body: some View {
         HStack {
-            Text(server.name)
+            Text(server.name ?? "")
             Spacer()
             Text("\(server.distance)")
         }

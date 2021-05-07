@@ -33,6 +33,9 @@
 		2238D9782644252600D23B16 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D9772644252600D23B16 /* Server.swift */; };
 		2238D97E26442A6C00D23B16 /* ServerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238D97D26442A6C00D23B16 /* ServerRowView.swift */; };
 		22E94D0426452AE100A1B60A /* ListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E94D0326452AE100A1B60A /* ListHeaderView.swift */; };
+		22E94D0726453AAF00A1B60A /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E94D0626453AAF00A1B60A /* Database.swift */; };
+		22E94D0A26453BB800A1B60A /* Servers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22E94D0826453BB800A1B60A /* Servers.xcdatamodeld */; };
+		22E94D0C26453D2F00A1B60A /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E94D0B26453D2F00A1B60A /* CodingUserInfoKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		2238D9772644252600D23B16 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		2238D97D26442A6C00D23B16 /* ServerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRowView.swift; sourceTree = "<group>"; };
 		22E94D0326452AE100A1B60A /* ListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeaderView.swift; sourceTree = "<group>"; };
+		22E94D0626453AAF00A1B60A /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		22E94D0926453BB800A1B60A /* Servers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Servers.xcdatamodel; sourceTree = "<group>"; };
+		22E94D0B26453D2F00A1B60A /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +140,11 @@
 		2238D8942643DFC200D23B16 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2238D943264402E000D23B16 /* Models */,
+				22E94D0526453A9200A1B60A /* Database */,
 				2238D8952643DFC300D23B16 /* NordSecTestApp.swift */,
 				2238D9142643EFEC00D23B16 /* AppDataContainer.swift */,
 				2238D95F264417FD00D23B16 /* KeyChainWrapper.swift */,
+				2238D943264402E000D23B16 /* Models */,
 				2238D9252644021300D23B16 /* Networking */,
 				2238D94F2644031300D23B16 /* UI */,
 				2238D9542644031B00D23B16 /* Common */,
@@ -206,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				2238D8E92643E32C00D23B16 /* Color.swift */,
+				22E94D0B26453D2F00A1B60A /* CodingUserInfoKey.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,6 +283,15 @@
 				22E94D0326452AE100A1B60A /* ListHeaderView.swift */,
 			);
 			path = ServerList;
+			sourceTree = "<group>";
+		};
+		22E94D0526453A9200A1B60A /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				22E94D0626453AAF00A1B60A /* Database.swift */,
+				22E94D0826453BB800A1B60A /* Servers.xcdatamodeld */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,15 +454,18 @@
 				2238D9312644023700D23B16 /* RequestProviding.swift in Sources */,
 				2238D8F92643E85F00D23B16 /* HeaderView.swift in Sources */,
 				2238D97E26442A6C00D23B16 /* ServerRowView.swift in Sources */,
+				22E94D0C26453D2F00A1B60A /* CodingUserInfoKey.swift in Sources */,
 				2238D8D82643E09D00D23B16 /* LoginView.swift in Sources */,
 				2238D9032643ECF400D23B16 /* UsernameField.swift in Sources */,
 				2238D8EA2643E32C00D23B16 /* Color.swift in Sources */,
+				22E94D0A26453BB800A1B60A /* Servers.xcdatamodeld in Sources */,
 				2238D9272644021C00D23B16 /* APISessionProviding.swift in Sources */,
 				22E94D0426452AE100A1B60A /* ListHeaderView.swift in Sources */,
 				2238D9092643ED0E00D23B16 /* PasswordField.swift in Sources */,
 				2238D960264417FD00D23B16 /* KeyChainWrapper.swift in Sources */,
 				2238D8C02643DFCA00D23B16 /* ContentView.swift in Sources */,
 				2238D8BE2643DFCA00D23B16 /* NordSecTestApp.swift in Sources */,
+				22E94D0726453AAF00A1B60A /* Database.swift in Sources */,
 				2238D9152643EFEC00D23B16 /* AppDataContainer.swift in Sources */,
 				2238D93E264402BB00D23B16 /* TokenProvider.swift in Sources */,
 				2238D95A26440D9A00D23B16 /* ServerListProvider.swift in Sources */,
@@ -840,6 +860,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		22E94D0826453BB800A1B60A /* Servers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22E94D0926453BB800A1B60A /* Servers.xcdatamodel */,
+			);
+			currentVersion = 22E94D0926453BB800A1B60A /* Servers.xcdatamodel */;
+			path = Servers.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2238D8902643DFC200D23B16 /* Project object */;
 }

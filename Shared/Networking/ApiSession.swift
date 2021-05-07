@@ -13,6 +13,8 @@ struct ApiSession: APISessionProviding {
                                          qos: .default,
                                          attributes: .concurrent)
     
+    let decoder = JSONDecoder()
+    
     func execute<T>(_ requestProvider: RequestProviding) -> AnyPublisher<T, Error> where T : Codable {
         return URLSession.shared.dataTaskPublisher(for: requestProvider.urlRequest())
             .receive(on: apiQueue)
@@ -26,9 +28,20 @@ struct ApiSession: APISessionProviding {
                     throw URLError(.userAuthenticationRequired)
                 }
                 
+                let context = Database.shared.viewContext()
+                decoder.userInfo[CodingUserInfoKey.context!] = context
+                
+                context.performAndWait {
+                    do {
+                        try context.save()
+                    } catch let error {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+                
                 return element.data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: T.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
     

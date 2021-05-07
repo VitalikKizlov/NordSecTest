@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 class AppDataContainer: ObservableObject {
     
@@ -68,6 +69,8 @@ class AppDataContainer: ObservableObject {
     // MARK: - Init
     
     init(apiSession: APISessionProviding = ApiSession()) {
+        Database.start()
+        
         self.session = apiSession
         self.tokenProvider = TokenProvider(apiSession: self.session)
         self.serverListProvider = ServerListProvider(apiSession: self.session)
@@ -128,6 +131,11 @@ class AppDataContainer: ObservableObject {
             guard let self = self else { return }
             self.serverList = list
             self.state = .list
+            
+            // MARK: - Just for testing purpose that persistence is working
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.fetchServersFromDatabase()
+            }
         }
         
         serverListProvider.getList()
@@ -137,6 +145,17 @@ class AppDataContainer: ObservableObject {
             .store(in: &cancellableSet)
     }
     
+    
+    public func fetchServersFromDatabase() {
+        let serversRequest = NSFetchRequest<Server>(entityName: "Server")
+        do {
+            let servers = try Database.shared.viewContext().fetch(serversRequest)
+            print("Servers Count ---", servers.count)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     /// - Tag: Sorting methods
     
     public func sortList(by sortMethod: SortMethod) {
@@ -144,7 +163,7 @@ class AppDataContainer: ObservableObject {
         case .distance:
             serverList = serverList.sorted(by: { $0.distance < $1.distance })
         case .alphabetical:
-            serverList = serverList.sorted(by: { $0.name.localizedStandardCompare($1.name) == .orderedAscending })
+            serverList = serverList.sorted(by: { $0.name?.localizedStandardCompare($1.name ?? "") == .orderedAscending })
         }
     }
     
