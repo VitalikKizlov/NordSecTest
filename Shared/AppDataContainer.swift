@@ -27,7 +27,7 @@ class AppDataContainer: ObservableObject {
     // MARK: - Private
     
     enum State {
-        case loggedOut, loadingList, list, error(Error)
+        case loggedOut, loadingList, list
     }
     
     enum SortMethod {
@@ -35,6 +35,9 @@ class AppDataContainer: ObservableObject {
     }
     
     private var cancellableSet: Set<AnyCancellable> = []
+    
+    private var showErrorSubject = PassthroughSubject<Bool, Never>()
+    private(set) lazy var showErrorPublisher = showErrorSubject.eraseToAnyPublisher()
     
     private var isUsernameValidPublisher: AnyPublisher<Bool, Never> {
         $username
@@ -86,7 +89,7 @@ class AppDataContainer: ObservableObject {
             switch completion {
             case .failure(let error):
                 print("Failure: \(error.localizedDescription)")
-                self?.state = .error(error)
+                self?.showErrorSubject.send(true)
             case .finished:
                 print("Finished")
             }
@@ -96,6 +99,7 @@ class AppDataContainer: ObservableObject {
             guard let self = self else { return }
             self.saveCredentialsAndToken(token.token)
             self.state = .loadingList
+            self.clearUserNameAndPass()
         }
         
         tokenProvider.getToken(for: creds)
@@ -114,7 +118,7 @@ class AppDataContainer: ObservableObject {
             switch completion {
             case .failure(let error):
                 print("Failure: \(error.localizedDescription)")
-                self?.state = .error(error)
+                self?.showErrorSubject.send(true)
             case .finished:
                 print("Finished")
             }
@@ -145,6 +149,11 @@ class AppDataContainer: ObservableObject {
     }
     
     // MARK: - Private Methods
+    
+    private func clearUserNameAndPass() {
+        username = ""
+        password = ""
+    }
     
     private func saveCredentialsAndToken(_ token: String) {
         KeychainWrapper.shared.storeValueFor(service: .token, value: token)
