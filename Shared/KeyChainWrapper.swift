@@ -103,4 +103,24 @@ class KeychainWrapper {
         
         return value
     }
+    
+    func deleteValueFor(service: KeychainServiceType) {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: account,
+            kSecAttrService as String: service.rawValue
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            print(KeychainWrapperError(status: status, type: .servicesError))
+            return
+        }
+    }
+    
+    public func cleanStorage() {
+        deleteValueFor(service: .username)
+        deleteValueFor(service: .password)
+        deleteValueFor(service: .token)
+    }
 }

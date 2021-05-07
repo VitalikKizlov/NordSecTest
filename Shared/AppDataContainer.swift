@@ -105,8 +105,8 @@ class AppDataContainer: ObservableObject {
     }
     
     public func performLogOut() {
+        KeychainWrapper.shared.cleanStorage()
         state = .loggedOut
-        // TODO: - Clean keychain
     }
     
     func getServerList() {
