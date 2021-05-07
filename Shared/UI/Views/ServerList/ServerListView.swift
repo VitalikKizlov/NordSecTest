@@ -12,8 +12,31 @@ struct ServerListView: View {
     @EnvironmentObject var appDataContainer: AppDataContainer
     
     var body: some View {
-        List(appDataContainer.serverList) { server in
-            ServerRowView(server: server)
+        NavigationView {
+            List {
+                Section(header: ListHeaderView()) {
+                    ForEach(appDataContainer.serverList) { server in
+                        ServerRowView(server: server)
+                    }
+                }
+            }
+            .navigationBarTitle("Testio.", displayMode: .inline)
+            .listStyle(GroupedListStyle())
+            .navigationBarItems(leading: Button(action: {
+                print("filter by")
+            }, label: {
+                HStack {
+                    Image("sorticon")
+                    Text("Filter")
+                }
+            }), trailing: Button(action: {
+                print("log out")
+            }, label: {
+                HStack {
+                    Image("sorticon")
+                    Text("Logout")
+                }
+            }))
         }
     }
 }
@@ -21,5 +44,6 @@ struct ServerListView: View {
 struct ServerListView_Previews: PreviewProvider {
     static var previews: some View {
         ServerListView()
+            .environmentObject(AppDataContainer())
     }
 }
