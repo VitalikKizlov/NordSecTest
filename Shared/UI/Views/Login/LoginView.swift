@@ -21,7 +21,9 @@ struct LoginView: View {
                 PasswordField()
                 
                 Button {
-                    appDataContainer.performLogin()
+                    withAnimation {
+                        appDataContainer.performLogin()
+                    }
                 } label: {
                     Text("Log in")
                         .foregroundColor(.white)

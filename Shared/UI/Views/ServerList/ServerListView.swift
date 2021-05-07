@@ -24,14 +24,18 @@ struct ServerListView: View {
             .navigationBarTitle("Testio.", displayMode: .inline)
             .listStyle(GroupedListStyle())
             .navigationBarItems(leading: Button(action: {
-                showFilterOptions.toggle()
+                withAnimation {
+                    showFilterOptions.toggle()
+                }
             }, label: {
                 HStack {
                     Image("sorticon")
                     Text("Filter")
                 }
             }), trailing: Button(action: {
-                appDataContainer.performLogOut()
+                withAnimation {
+                    appDataContainer.performLogOut()
+                }
             }, label: {
                 HStack {
                     Image("sorticon")
